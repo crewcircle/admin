@@ -59,6 +59,13 @@ class OllamaManager {
         detached: false,
       });
 
+      // Swallow spawn errors (e.g. ollama binary not installed) so they don't
+      // become uncaught exceptions in the main process. The port wait below
+      // will simply time out and report Ollama as unavailable.
+      this.serverProcess.on('error', (err) => {
+        console.warn('Ollama spawn error (ollama likely not installed):', err.message);
+      });
+
       // 3. Wait for port 11434 to become available
       const ready = await this.waitForPort(11434, 15000);
       if (!ready) {

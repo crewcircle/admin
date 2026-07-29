@@ -2,6 +2,7 @@ import { useProjects } from '../../hooks/use-projects';
 import { useCostDashboard } from '../../hooks/use-costs';
 import { useSentry } from '../../hooks/use-observability';
 import { ErrorBanner } from '../shared/error-banner';
+import { StatCard } from '../shared/stat-card';
 
 export function DashboardPage() {
   const { data: projects, loading: projectsLoading, error: projectsError } = useProjects();
@@ -31,21 +32,25 @@ export function DashboardPage() {
           label="Active Projects"
           value={projectsLoading ? '—' : String(activeCount)}
           color="text-[#22c55e]"
+          size="lg"
         />
         <StatCard
           label="Archived"
           value={projectsLoading ? '—' : String(killedCount)}
           color="text-[#8888a0]"
+          size="lg"
         />
         <StatCard
           label="Monthly Cost (est. AUD)"
           value={costsLoading ? '—' : `A$${(costs?.summary.total_monthly_aud_estimate ?? 0).toFixed(0)}`}
           color="text-[#f59e0b]"
+          size="lg"
         />
         <StatCard
           label="Sentry Unresolved"
           value={sentryLoading ? '—' : String(sentry?.total_unresolved ?? 0)}
           color="text-[#ef4444]"
+          size="lg"
         />
       </div>
 
@@ -124,19 +129,4 @@ export function DashboardPage() {
   );
 }
 
-function StatCard({
-  label,
-  value,
-  color,
-}: {
-  label: string;
-  value: string;
-  color: string;
-}) {
-  return (
-    <div className="bg-[#111118] border border-[#2a2a3a] rounded-lg p-4">
-      <p className="text-xs text-[#8888a0] uppercase tracking-wider mb-1">{label}</p>
-      <p className={`text-3xl font-bold ${color}`}>{value}</p>
-    </div>
-  );
-}
+// StatCard is imported from ../shared/stat-card.tsx

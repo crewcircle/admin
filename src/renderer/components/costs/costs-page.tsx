@@ -1,6 +1,7 @@
 import { useCostDashboard } from '../../hooks/use-costs';
 import type { FixedCost } from '../../hooks/types';
 import { ErrorBanner } from '../shared/error-banner';
+import { StatCard } from '../shared/stat-card';
 
 export function CostsPage() {
   const { data, loading, error } = useCostDashboard();
@@ -27,17 +28,17 @@ export function CostsPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-3 gap-4">
-        <CostCard
+        <StatCard
           label="Total Monthly (est. AUD)"
           value={`A$${(summary?.total_monthly_aud_estimate ?? 0).toFixed(0)}`}
           color="text-[#f59e0b]"
         />
-        <CostCard
+        <StatCard
           label="LLM Spend (30d USD)"
           value={`$${(llm?.total_usd ?? 0).toFixed(2)}`}
           color="text-[#6366f1]"
         />
-        <CostCard
+        <StatCard
           label="Fixed Costs (monthly AUD)"
           value={`A$${(fixed?.total_monthly_aud ?? 0).toFixed(0)}`}
           color="text-[#22c55e]"
@@ -143,8 +144,8 @@ export function CostsPage() {
             <tr className="border-b border-[#2a2a3a] text-[#8888a0] text-left">
               <th className="pb-2 font-medium">Name</th>
               <th className="pb-2 font-medium">Category</th>
-              <th className="pb-2 font-medium text-right">Amount</th>
-              <th className="pb-2 font-medium">Frequency</th>
+              <th className="pb-2 font-medium text-right px-2">Amount</th>
+              <th className="pb-2 font-medium px-2">Frequency</th>
               <th className="pb-2 font-medium">Provider</th>
             </tr>
           </thead>
@@ -153,10 +154,10 @@ export function CostsPage() {
               <tr key={item.id} className="border-b border-[#1a1a24]">
                 <td className="py-2 text-[#e4e4ed]">{item.name}</td>
                 <td className="py-2 text-[#8888a0]">{item.category}</td>
-                <td className="py-2 text-[#e4e4ed] text-right">
+                <td className="py-2 text-[#e4e4ed] text-right px-2 whitespace-nowrap">
                   {item.currency} ${(item.amount_cents / 100).toFixed(2)}
                 </td>
-                <td className="py-2 text-[#8888a0]">{item.frequency}</td>
+                <td className="py-2 text-[#8888a0] px-2 whitespace-nowrap">{item.frequency}</td>
                 <td className="py-2 text-[#8888a0]">{item.provider ?? '—'}</td>
               </tr>
             ))}
@@ -174,19 +175,4 @@ export function CostsPage() {
   );
 }
 
-function CostCard({
-  label,
-  value,
-  color,
-}: {
-  label: string;
-  value: string;
-  color: string;
-}) {
-  return (
-    <div className="bg-[#111118] border border-[#2a2a3a] rounded-lg p-4">
-      <p className="text-xs text-[#8888a0] uppercase tracking-wider mb-1">{label}</p>
-      <p className={`text-2xl font-bold ${color}`}>{value}</p>
-    </div>
-  );
-}
+// StatCard is imported from ../shared/stat-card.tsx

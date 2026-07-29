@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "seed": "npx tsx scripts/seed-data.ts"
+    "seed": "npx tsx scripts/seed-data.ts",
+    "postinstall": "electron-rebuild"
   },
   "dependencies": {
     "better-sqlite3": "^11.7.0",
@@ -32,6 +33,7 @@
     "vite": "^5",
     "tailwindcss": "^4",
     "@tailwindcss/vite": "^4",
+    "@electron/rebuild": "^3",
     "typescript": "^5",
     "vitest": "^4.1.8",
     "@playwright/test": "^1.60.0"

@@ -5,3 +5,5 @@ admin.db
 *.enc
 *.log
 .DS_Store
+admin.db-shm
+admin.db-wal

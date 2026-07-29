@@ -1,21 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-declare global {
-  interface Window {
-    adminAPI: {
-      invoke: <T>(channel: string, input?: unknown) => Promise<T>;
-      on: (channel: string, cb: (...args: unknown[]) => void) => () => void;
-    };
-    copilotAPI: {
-      invoke: <T>(channel: string, input?: unknown) => Promise<T>;
-      on: (channel: string, cb: (...args: unknown[]) => void) => () => void;
-    };
-    electronAPI: {
-      onNavigate: (callback: (path: string) => void) => () => void;
-    };
-  }
-}
-
 /** Generic IPC invoke hook — returns a stable callback for the given channel. */
 export function useIpc<T>(channel: string) {
   const invoke = useCallback(
