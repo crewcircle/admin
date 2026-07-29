@@ -1,0 +1,39 @@
+{
+  "name": "@crewcircle/admin",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "package": "electron-builder",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "seed": "npx tsx scripts/seed-data.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router": "^7",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.14.0",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "electron": "^33",
+    "electron-builder": "^25",
+    "electron-vite": "^2",
+    "@vitejs/plugin-react": "^4",
+    "vite": "^5",
+    "tailwindcss": "^4",
+    "@tailwindcss/vite": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.8",
+    "@playwright/test": "^1.60.0"
+  }
+}

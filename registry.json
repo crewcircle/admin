@@ -1,0 +1,52 @@
+{
+  "projects": [
+    {
+      "id": "CardSnap",
+      "name": "CardSnap",
+      "description": "Business card scanner and CRM",
+      "price_cents": 0,
+      "status": "active",
+      "created_at": "2025-01-15"
+    },
+    {
+      "id": "crewRoster",
+      "name": "crewRoster",
+      "description": "Crew management and rostering platform",
+      "price_cents": 0,
+      "status": "active",
+      "created_at": "2025-02-01"
+    },
+    {
+      "id": "smartGL",
+      "name": "smartGL",
+      "description": "AI-powered general ledger automation",
+      "price_cents": 0,
+      "status": "active",
+      "created_at": "2025-03-10"
+    },
+    {
+      "id": "taxflow-ai",
+      "name": "taxflow-ai",
+      "description": "AI tax workflow and compliance platform",
+      "price_cents": 0,
+      "status": "active",
+      "created_at": "2025-04-22"
+    },
+    {
+      "id": "localmate",
+      "name": "localmate",
+      "description": "Local services marketplace",
+      "price_cents": 0,
+      "status": "active",
+      "created_at": "2025-05-18"
+    },
+    {
+      "id": "AUrate",
+      "name": "AUrate",
+      "description": "Australian business rating and reviews",
+      "price_cents": 0,
+      "status": "active",
+      "created_at": "2025-06-05"
+    }
+  ]
+}

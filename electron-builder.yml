@@ -1,0 +1,11 @@
+appId: com.crewcircle.admin
+productName: CrewCircle Admin
+directories:
+  buildResources: resources
+  output: dist
+files:
+  - out/**/*
+  - "!out/renderer/**/*.map"
+mac:
+  target: dmg
+  category: public.app-category.developer-tools
