@@ -6,6 +6,8 @@ const TABS = [
   { path: '/projects', label: 'Projects' },
   { path: '/costs', label: 'Costs' },
   { path: '/observability', label: 'Observability' },
+  { path: '/social', label: 'Social' },
+  { path: '/insights', label: 'Insights' },
   { path: '/architecture', label: 'Architecture' },
   { path: '/copilot', label: 'Copilot' },
 ];

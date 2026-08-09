@@ -9,6 +9,9 @@ import { registerProviderHandlers } from './handlers/provider-handler';
 import { registerProvisionHandlers } from './handlers/provision-handler';
 import { registerCIScaffoldHandlers } from './handlers/ci-scaffold-handler';
 import { registerOllamaQueryHandlers } from './handlers/ollama-query-handler';
+import { registerSocialHandlers } from './handlers/social-handler';
+import { registerInsightsHandlers } from './handlers/insights-handler';
+import { statusService } from './services/status-service';
 import { registerSetupWizardHandlers } from './setup-wizard';
 import { registerSaaSHandlers } from './browser-view-manager';
 
@@ -23,6 +26,9 @@ export function registerIpcHandlers(): void {
   registerProvisionHandlers();
   registerCIScaffoldHandlers();
   registerOllamaQueryHandlers();
+  registerSocialHandlers();
+  registerInsightsHandlers();
+  statusService.registerIpc();
 
   // Credential management
   ipcMain.handle('credentials:getAll', async () => {

@@ -63,6 +63,26 @@ export function initDatabase(): void {
       );
       CREATE INDEX IF NOT EXISTS idx_provisioning_jobs_project_id ON provisioning_jobs(project_id);
       CREATE INDEX IF NOT EXISTS idx_provisioning_jobs_status ON provisioning_jobs(status);
+
+      CREATE TABLE IF NOT EXISTS social_campaigns (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL,
+        platform TEXT DEFAULT 'other' CHECK(platform IN ('linkedin','twitter','instagram','facebook','tiktok','youtube','other')),
+        status TEXT DEFAULT 'draft' CHECK(status IN ('draft','active','paused','ended')),
+        budget_cents INTEGER DEFAULT 0, spend_cents INTEGER DEFAULT 0,
+        currency TEXT DEFAULT 'AUD', start_date TEXT, end_date TEXT,
+        impressions INTEGER DEFAULT 0, clicks INTEGER DEFAULT 0, conversions INTEGER DEFAULT 0,
+        notes TEXT, created_at TEXT DEFAULT (datetime('now')), updated_at TEXT DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_social_campaigns_status ON social_campaigns(status);
+      CREATE INDEX IF NOT EXISTS idx_social_campaigns_platform ON social_campaigns(platform);
+
+      CREATE TABLE IF NOT EXISTS insights (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, source TEXT DEFAULT 'manual',
+        input_excerpt TEXT DEFAULT '', summary TEXT DEFAULT '',
+        issues TEXT DEFAULT '[]', suggestions TEXT DEFAULT '[]',
+        created_at TEXT DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_insights_created_at ON insights(created_at);
     `;
   }
 

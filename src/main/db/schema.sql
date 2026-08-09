@@ -54,3 +54,38 @@ CREATE TABLE IF NOT EXISTS provisioning_jobs (
 CREATE INDEX IF NOT EXISTS idx_provisioning_jobs_project_id ON provisioning_jobs (project_id);
 CREATE INDEX IF NOT EXISTS idx_provisioning_jobs_status ON provisioning_jobs (status);
 CREATE INDEX IF NOT EXISTS idx_provisioning_jobs_created_at ON provisioning_jobs (created_at);
+
+CREATE TABLE IF NOT EXISTS social_campaigns (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    name            TEXT NOT NULL,
+    platform        TEXT NOT NULL DEFAULT 'other'
+                    CHECK (platform IN ('linkedin', 'twitter', 'instagram', 'facebook', 'tiktok', 'youtube', 'other')),
+    status          TEXT NOT NULL DEFAULT 'draft'
+                    CHECK (status IN ('draft', 'active', 'paused', 'ended')),
+    budget_cents    INTEGER NOT NULL DEFAULT 0,
+    spend_cents     INTEGER NOT NULL DEFAULT 0,
+    currency        TEXT NOT NULL DEFAULT 'AUD',
+    start_date      TEXT,
+    end_date        TEXT,
+    impressions     INTEGER NOT NULL DEFAULT 0,
+    clicks          INTEGER NOT NULL DEFAULT 0,
+    conversions     INTEGER NOT NULL DEFAULT 0,
+    notes           TEXT,
+    created_at      TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_social_campaigns_status ON social_campaigns (status);
+CREATE INDEX IF NOT EXISTS idx_social_campaigns_platform ON social_campaigns (platform);
+
+CREATE TABLE IF NOT EXISTS insights (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    source          TEXT NOT NULL DEFAULT 'manual',
+    input_excerpt   TEXT NOT NULL DEFAULT '',
+    summary         TEXT NOT NULL DEFAULT '',
+    issues          TEXT NOT NULL DEFAULT '[]',
+    suggestions     TEXT NOT NULL DEFAULT '[]',
+    created_at      TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_insights_created_at ON insights (created_at);

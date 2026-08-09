@@ -105,11 +105,62 @@ export interface UptimeCheckResults {
   results: UptimeResult[];
 }
 
+export interface ServiceStatus {
+  id: string;
+  ok: boolean;
+  statusCode: number | null;
+  latencyMs: number;
+  checkedAt: number;
+  failures: number;
+  detail?: string;
+}
+
 export interface OllamaStatus {
   running: boolean;
   model: string | null;
   availableModels: string[];
   error?: string;
+}
+
+export interface SocialCampaign {
+  id: number;
+  name: string;
+  platform: 'linkedin' | 'twitter' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'other';
+  status: 'draft' | 'active' | 'paused' | 'ended';
+  budget_cents: number;
+  spend_cents: number;
+  currency: string;
+  start_date: string | null;
+  end_date: string | null;
+  impressions: number;
+  clicks: number;
+  conversions: number;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Insight {
+  id: number;
+  source: string;
+  input_excerpt: string;
+  summary: string;
+  issues: string;      // JSON array of strings
+  suggestions: string; // JSON array of strings
+  created_at: string;
+}
+
+export interface InsightAnalysisResult {
+  summary: string;
+  issues: string[];
+  suggestions: string[];
+}
+
+export interface InsightAnalyzeResponse {
+  success: boolean;
+  error?: string;
+  insight?: Insight;
+  result?: InsightAnalysisResult;
 }
 
 export interface ProvisioningJob {

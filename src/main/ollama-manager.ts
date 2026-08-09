@@ -132,10 +132,11 @@ class OllamaManager {
 
   async chat(
     prompt: string,
-    contextData?: Record<string, unknown>
+    contextData?: Record<string, unknown>,
+    options?: { system?: string; json?: boolean }
   ): Promise<string> {
     // Format context as structured text
-    let systemContent = SYSTEM_PROMPT;
+    let systemContent = options?.system ?? SYSTEM_PROMPT;
     if (contextData && Object.keys(contextData).length > 0) {
       systemContent +=
         '\n\nHere is the current admin app data:\n\n' +
@@ -147,17 +148,22 @@ class OllamaManager {
       { role: 'user', content: prompt },
     ];
 
-    const response = await this.httpPost<{
-      message?: { content: string };
-      response?: string;
-    }>('/api/chat', {
+    const body: Record<string, unknown> = {
       model: this.currentModel,
       stream: false,
       messages,
       options: {
         temperature: 0.7,
       },
-    });
+    };
+    if (options?.json) {
+      body.format = 'json';
+    }
+
+    const response = await this.httpPost<{
+      message?: { content: string };
+      response?: string;
+    }>('/api/chat', body);
 
     return response.message?.content ?? response.response ?? '';
   }

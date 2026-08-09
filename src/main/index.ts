@@ -5,6 +5,7 @@ import { credentialManager } from './credential-manager';
 import { ollamaManager } from './ollama-manager';
 import { browserViewManager } from './browser-view-manager';
 import { initDatabase } from './db/database';
+import { statusService } from './services/status-service';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -23,6 +24,8 @@ async function createWindow(): Promise<void> {
   });
 
   browserViewManager.setWindow(mainWindow);
+  statusService.setWindow(mainWindow);
+  statusService.start();
 
   if (process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);

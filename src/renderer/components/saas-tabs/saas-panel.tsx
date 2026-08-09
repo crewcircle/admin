@@ -23,8 +23,8 @@ export function SaaSPanel() {
 
     setError(null);
     window.adminAPI
-      .invoke('saas:openView', { provider })
-      .then((result: { success: boolean }) => {
+      .invoke<{ success: boolean }>('saas:openView', { provider })
+      .then((result) => {
         if (!result.success) {
           setError('Failed to open SaaS view');
         }

@@ -3,6 +3,7 @@ import { useCostDashboard } from '../../hooks/use-costs';
 import { useSentry } from '../../hooks/use-observability';
 import { ErrorBanner } from '../shared/error-banner';
 import { StatCard } from '../shared/stat-card';
+import { StatusBoard } from '../status/status-board';
 
 export function DashboardPage() {
   const { data: projects, loading: projectsLoading, error: projectsError } = useProjects();
@@ -52,6 +53,14 @@ export function DashboardPage() {
           color="text-[#ef4444]"
           size="lg"
         />
+      </div>
+
+      {/* Live service status */}
+      <div className="bg-[#111118] border border-[#2a2a3a] rounded-lg p-4">
+        <h2 className="text-sm font-medium text-[#8888a0] mb-3 uppercase tracking-wider">
+          Service Status
+        </h2>
+        <StatusBoard />
       </div>
 
       {/* Quick Stats */}
